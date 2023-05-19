@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { User } from '../user.model';
 import { UserService } from '../user.service';
 
@@ -11,21 +10,11 @@ import { UserService } from '../user.service';
 export class ListComponent implements OnInit {
 
   users: User[] = [];
+  displayedColumns: string[] = ['id', 'name', 'email', 'actions'];
 
-  constructor(private userService: UserService,
-    private router: Router) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
     this.users = this.userService.getUsers();
   }
-
-  updateUser(user: User): void {
-    this.router.navigate(['/users', user.id]);
-  }
-
-  deleteUser(id: number): void {
-    this.userService.deleteUser(id);
-    this.users = this.userService.getUsers();
-  }
-
 }

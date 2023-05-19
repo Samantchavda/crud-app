@@ -33,7 +33,6 @@ export class CrudComponent implements OnInit {
   }
 
   saveUser(user: User): void {
-    console.log(user);
     if(user.id == 0){
       this.userService.addUser(user);
     }else{
@@ -42,4 +41,8 @@ export class CrudComponent implements OnInit {
     this.router.navigate(['/users']);
   }
 
+  deleteUser(id: number): void {
+    this.userService.deleteUser(id);
+    this.router.navigate(['/users']);
+  }
 }
