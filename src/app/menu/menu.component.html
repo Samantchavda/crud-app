@@ -1,0 +1,13 @@
+<mat-toolbar color="primary">
+  <span>Crud App</span>
+  <mat-nav-list>
+    <a mat-list-item routerLink="/home">Home</a>
+    <a mat-list-item routerLink="/users">Users</a>
+  </mat-nav-list>
+  <span class="spacer"></span>
+  <mat-nav-list>
+    <span *ngIf="isLoggedIn" style="display: flex;padding-top: 7px;">Welcome {{ userName }}</span>
+    <a mat-list-item *ngIf="!isLoggedIn" (click)="logOut(true)" style="cursor: pointer">Log In</a>
+    <a mat-list-item *ngIf="isLoggedIn" (click)="logOut(false)" style="cursor: pointer">Log Out</a>
+  </mat-nav-list>
+</mat-toolbar>

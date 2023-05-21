@@ -11,12 +11,18 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MenuComponent } from './menu/menu.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CrudComponent,
-    ListComponent
+    ListComponent,
+    MenuComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +33,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatCardModule,
     MatInputModule,
     MatPaginatorModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatToolbarModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
