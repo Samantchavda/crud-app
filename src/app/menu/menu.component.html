@@ -7,7 +7,7 @@
   <span class="spacer"></span>
   <mat-nav-list>
     <span *ngIf="isLoggedIn" style="display: flex;padding-top: 7px;">Welcome {{ userName }}</span>
-    <a mat-list-item *ngIf="!isLoggedIn" (click)="logOut(true)" style="cursor: pointer">Log In</a>
-    <a mat-list-item *ngIf="isLoggedIn" (click)="logOut(false)" style="cursor: pointer">Log Out</a>
+    <a mat-list-item *ngIf="isLoggedIn" (click)="logOut()" style="cursor: pointer">Log Out</a>
+    <a *ngIf="!isLoggedIn" mat-list-item routerLink="/login" style="cursor: pointer">Log In</a>
   </mat-nav-list>
 </mat-toolbar>
