@@ -15,6 +15,8 @@ import { MenuComponent } from './menu/menu.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { HomeComponent } from './home/home.component';
     CrudComponent,
     ListComponent,
     MenuComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,8 @@ import { HomeComponent } from './home/home.component';
     MatPaginatorModule,
     ReactiveFormsModule,
     MatToolbarModule,
-    MatListModule
+    MatListModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

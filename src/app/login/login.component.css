@@ -1,0 +1,14 @@
+.form-element {
+    width: 500px;
+}
+
+.list-container {
+    padding: 20px;
+}
+
+.error {
+    padding: 16px;
+    width: 300px;
+    color: white;
+    background-color: red;
+}
