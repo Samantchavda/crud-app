@@ -1,51 +1,36 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { User } from './user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private users: User[] = [
-    { id: 1, name: 'John Doe', email: 'john@example.com' },
-    { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
-    { id: 3, name: 'Bob Johnson', email: 'bob@example.com' },
-    { id: 4, name: 'stive', email: 'stive@example.com' },
-    { id: 5, name: 'jack', email: 'jack@example.com' },
-    { id: 6, name: 'mark', email: 'mark@example.com' },
-    { id: 7, name: 'stella', email: 'stella@example.com' }
-  ];
+  private apiUrl = 'api/users'; // API endpoint
 
-  private user: User = {
-    id: 0,
-    name: '',
-    email: ''
-  };
-  getUsers(): User[] {
-    return this.users;
+  constructor(private http: HttpClient) {}
+
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.apiUrl);
   }
 
-  getUser(id: number): User {
-    return this.users.find(u => u.id === id) || this.user;
+  getUser(id: number): Observable<User> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.get<User>(url);
   }
 
-  addUser(user: User): void {
-    if (this.users.length > 0) {
-      user.id = this.users[this.users.length - 1].id + 1;
-    }
-    this.users.push(user);
+  addUser(user: User): Observable<User> {
+    return this.http.post<User>(this.apiUrl, user);
   }
 
-  updateUser(user: User): void {
-    const index = this.users.findIndex(u => u.id === user.id);
-    if (index !== -1) {
-      this.users[index] = user;
-    }
+  updateUser(user: User): Observable<User> {
+    const url = `${this.apiUrl}/${user.id}`;
+    return this.http.put<User>(url, user);
   }
 
-  deleteUser(id: number): void {
-    const index = this.users.findIndex(u => u.id === id);
-    if (index !== -1) {
-      this.users.splice(index, 1);
-    }
+  deleteUser(id: number): Observable<void> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.delete<void>(url);
   }
 }

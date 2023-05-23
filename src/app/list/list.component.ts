@@ -19,8 +19,12 @@ export class ListComponent implements OnInit, AfterViewInit {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.users = this.userService.getUsers();;
-    this.dataSource = new MatTableDataSource<User>(this.users);
+    this.userService.getUsers().subscribe(users => {
+      this.users = users;
+      this.dataSource = new MatTableDataSource<User>(this.users);
+      this.dataSource.paginator = this.paginator;
+    });
+    
   }
 
   ngAfterViewInit() {

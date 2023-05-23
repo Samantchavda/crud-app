@@ -10,7 +10,7 @@ import { UserService } from '../user.service';
   styleUrls: ['./crud.component.css']
 })
 export class CrudComponent implements OnInit {
-
+  
   headerText: string = "test";
   users: User[] = [];
 
@@ -30,13 +30,19 @@ export class CrudComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.userService.getUsers().subscribe(users => {
+      this.users = users;
+    });
+
     this.route.paramMap.subscribe((param) => {
       var id = Number(param.get('id'));
       if (id > 0) {
-        this.user = this.userService.getUser(id);
-        this.userForm.patchValue({
-          name: this.user.name,
-          email: this.user.email
+        this.userService.getUser(id).subscribe(user => {
+          this.user = user;
+          this.userForm.patchValue({
+            name: this.user.name,
+            email: this.user.email
+          });
         });
       }
     });
@@ -48,16 +54,22 @@ export class CrudComponent implements OnInit {
       // This ensures values not on the form, such as the Id, are retained
       const user: User = { ...this.user, ...this.userForm.value };
       if (user.id == 0) {
-        this.userService.addUser(user);
+        let users = this.users.length;
+        user.id = users >  0 ? (this.users[this.users.length - 1].id + 1) : 1;
+        this.userService.addUser(user).subscribe(() => {
+          this.router.navigate(['/users']);
+        });
       } else {
-        this.userService.updateUser(user);
+        this.userService.updateUser(user).subscribe(() => {
+          this.router.navigate(['/users']);
+        });
       }
-      this.router.navigate(['/users']);
-    };
+    }
   }
 
   deleteUser(id: number): void {
-    this.userService.deleteUser(id);
-    this.router.navigate(['/users']);
+    this.userService.deleteUser(id).subscribe(() => {
+      this.router.navigate(['/users']);
+    });
   }
 }
